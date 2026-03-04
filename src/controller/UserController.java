@@ -25,9 +25,10 @@ public class UserController {
                     System.out.println(
                             "                                                                  =========================================== ");
                     System.out.println(
-                            "                                                                    ||             1.LOGIN             ||");
+                            "                                                                    ||             1.REGISTER          ||");
                     System.out.println(
-                            "                                                                    ||             2.REGISTER          ||");
+                            "                                                                    ||             2.LOGIN             ||");
+
                     System.out.println(
                             "                                                                  =========================================== ");
                     greetings.enter();
@@ -36,11 +37,12 @@ public class UserController {
 
                     int choose = sc.nextInt();
                     switch (choose) {
-                        case 1:
-                            break;
 
-                        case 2:
+                        case 1:
                             userService.registerUser();
+                            break;
+                        case 2:
+                            userService.login();
                             break;
 
                         default:

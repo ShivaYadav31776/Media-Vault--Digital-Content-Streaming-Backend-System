@@ -2,8 +2,10 @@ package service;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import data.UserList;
 import model.User;
 import repository.SongRepository;
 import repository.UserRepository;
@@ -59,5 +61,34 @@ public class UserService {
         public void showSongs() throws FileNotFoundException {
                 SongRepository songRepository = new SongRepository();
                 songRepository.getAllSongs();
+        }
+
+        public void login() throws FileNotFoundException {
+                Scanner sc = new Scanner(System.in);
+                UserList userList = new UserList();
+                userList.loadUserList();
+                ArrayList<User> list = userList.getUserList();
+                System.out.print(
+                                "                                                                     ## Enter Email {Eg:avi@gamil.com}:- ");
+                String enteredEmail = sc.next();
+                System.out.print(
+                                "                                                                     ## Set Password{Eg:avi2025}:- ");
+                String enteredPassword = sc.next();
+                int l = 0;
+                int h = list.size();
+
+                while (l < h) {
+                        if (list.get(l).getEmail().equals(enteredEmail)
+                                        && list.get(l).getPassword().equals(enteredPassword)) {
+                                System.out.println();
+                                System.out.print(
+                                                "                                                                           LOGGED IN SUCCESSFULLY ");
+                                return;
+                        }
+                        l++;
+                }
+
+                System.out.print(
+                                "                                                                     INVALID USER !! ");
         }
 }
