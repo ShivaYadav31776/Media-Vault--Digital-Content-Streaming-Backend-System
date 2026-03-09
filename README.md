@@ -16,11 +16,11 @@
 <br>
 <hr>
 <hr>
-<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/1.png?raw=true" alt="Alt Text" width="300" height="200" />
-<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/2.png?raw=true" alt="Alt Text" width="300" height="200" />
-<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/3.png?raw=true" alt="Alt Text" width="300" height="200" />
-<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/4.png?raw=true" alt="Alt Text" width="300" height="200" />
-<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/5.png?raw=true" alt="Alt Text" width="300" height="200" />
-<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/6.png?raw=true" alt="Alt Text" width="300" height="200" />
-<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/7.png?raw=true" alt="Alt Text" width="300" height="200" />
-<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/8.png?raw=true" alt="Alt Text" width="300" height="200" />
+<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/1.png?raw=true" alt="Alt Text" width="600" height="200" />
+<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/2.png?raw=true" alt="Alt Text" width="600" height="200" />
+<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/3.png?raw=true" alt="Alt Text" width="600" height="200" />
+<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/4.png?raw=true" alt="Alt Text" width="600" height="200" />
+<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/5.png?raw=true" alt="Alt Text" width="600" height="200" />
+<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/6.png?raw=true" alt="Alt Text" width="600" height="200" />
+<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/7.png?raw=true" alt="Alt Text" width="600" height="200" />
+<img src="https://github.com/abhishekkrmahto/Media-Vault---Digital-Content-Streaming-Backend-System/blob/main/src/screenshorts/8.png?raw=true" alt="Alt Text" width="600" height="200" />
