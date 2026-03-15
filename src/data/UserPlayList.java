@@ -11,27 +11,30 @@ public class UserPlayList {
     public ArrayList<XyzUser> userlist = new ArrayList<>();
 
     public void loadUserPlayList() throws FileNotFoundException {
-        userlist.clear(); 
-        
-        File songsFile = new File("D:/Projects/Core JAVA/Media Vault - Digital Content & Streaming Backend System/Program/src/data/UserPlayList.csv");
+        userlist.clear();
+
+        File songsFile = new File(
+                "D:/Projects/Core JAVA/Media Vault - Digital Content & Streaming Backend System/Program/src/data/UserPlayList.csv");
 
         if (!songsFile.exists() || songsFile.length() == 0) {
-            return; 
+            return;
         }
 
         Scanner scanUsers = new Scanner(new BufferedInputStream(new FileInputStream(songsFile)));
 
         while (scanUsers.hasNextLine()) {
             String line = scanUsers.nextLine();
-            if (line.trim().isEmpty()) continue;
+            if (line.trim().isEmpty())
+                continue;
 
             String[] userDetailArray = line.split(",");
-            if (userDetailArray.length < 2) continue;
+            if (userDetailArray.length < 2)
+                continue;
 
             XyzUser userr = new XyzUser();
             userr.setUserId(userDetailArray[0]);
             userr.setEmail(userDetailArray[1]);
-            
+
             ArrayList<Integer> playListSongs = new ArrayList<>();
 
             if (userDetailArray.length > 2 && !userDetailArray[2].isEmpty()) {

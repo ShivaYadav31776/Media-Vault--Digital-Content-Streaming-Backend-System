@@ -83,7 +83,6 @@ public class LoggedInUserService {
         SongList songList = new SongList();
         String padding = " ".repeat(67);
         System.out.print(padding + "Enter Song Id:- ");
-        greetings.enter();
 
         int id = sc.nextInt();
 
