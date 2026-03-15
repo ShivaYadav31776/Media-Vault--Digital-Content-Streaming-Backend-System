@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Song {
-    int id;
+    public int id;
     String title;
     double duration;
     public int getId() {

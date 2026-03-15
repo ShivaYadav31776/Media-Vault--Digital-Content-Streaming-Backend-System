@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.util.Scanner;
-
 import model.Greetings;
 import service.AdminService;
 import service.Menu;
@@ -50,6 +49,11 @@ public class AdminController {
                 case 4:
                     adminService.showSongs();
                     break;
+                    
+
+                case 5:
+                    System.out.println("deleted" );
+                    break;    
 
                 default:
                     break;
