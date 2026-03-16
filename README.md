@@ -8,7 +8,6 @@
   <li>STACK</li>
   <li>QUEUE</li>
   <li>PRIORITY QUEUE</li>
-  <li>DOUBLE ENDED QUEUE</li>
   <li>LINKED LIST</li>
   <li>DOUBLE LINKED LIST</li>
 </ul>
