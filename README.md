@@ -6,7 +6,6 @@
   <li>BINARY SEARCH</li>
   <li>SORTING</li>
   <li>STACK</li>
-  <li>QUEUE</li>
   <li>PRIORITY QUEUE</li>
   <li>LINKED LIST</li>
   <li>DOUBLE LINKED LIST</li>
