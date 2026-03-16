@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import data.Nav;
 import data.SongList;
 import model.Greetings;
 import model.Playlist;
@@ -43,15 +44,16 @@ public class LoggedInUserService {
     SongList songList = new SongList();
     Scanner sc = new Scanner(System.in);
     Greetings greetings = new Greetings();
-    Node head = new Node(null);
 
-    public void playSongs() throws FileNotFoundException {
+    public void playSongs(User user) throws FileNotFoundException {
         songList.loadsongList();
         ArrayList<Song> list = songList.getSongList();
 
         Node current = Node.initializeSongDLL(list);
-        if (current == null)
-            return;
+        if (current == null) return;
+
+        // log first song
+        Nav.log(user.getUserId(), "Playing: " + current.song.getTitle());
 
         String padding = " ".repeat(67);
         while (true) {
@@ -69,8 +71,10 @@ public class LoggedInUserService {
             char ch = sc.next().charAt(0);
             if (ch == '+') {
                 current = current.next;
+                Nav.log(user.getUserId(), "Playing: " + current.song.getTitle());
             } else if (ch == '-') {
                 current = current.prev;
+                Nav.log(user.getUserId(), "Playing: " + current.song.getTitle());
             } else {
                 break;
             }
@@ -79,21 +83,16 @@ public class LoggedInUserService {
 
     public void appendSongToPlayList(User user) throws IOException {
         Playlist playlist = new Playlist();
-        Greetings greetings = new Greetings();
         SongList songList = new SongList();
         String padding = " ".repeat(67);
         System.out.print(padding + "Enter Song Id:- ");
 
         int id = sc.nextInt();
 
-        ArrayList<Song> songsList = new ArrayList<>();
         songList.loadsongList();
-        songsList = songList.getSongList();
+        ArrayList<Song> songsList = songList.getSongList();
 
         Song s = new Song();
-
-        // BINARY SEARCH
-
         boolean found = false;
         int l = 0;
         int h = songsList.size() - 1;
@@ -114,9 +113,10 @@ public class LoggedInUserService {
             }
         }
 
-        if (found == false) {
-            System.out.printf(padding + "  SONG NOT FOUND !! %-27s %");
+        if (!found) {
+            System.out.printf(padding + "  SONG NOT FOUND !! %-27s %n", "");
         } else {
+            Nav.log(user.getUserId(), "Added to Playlist: " + s.getTitle());
             playlist.pushToPlayList(user, s);
         }
     }

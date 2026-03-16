@@ -19,7 +19,7 @@ public class UserRepository {
         userList.loadUserList();
         ArrayList<User> list = userList.getUserList();
         File usersFile = new File(
-                "D:/Projects/Core JAVA/Media Vault - Digital Content & Streaming Backend System/Program/src/data/Users.csv");
+                "D:\\DSA Project\\Media-Vault---Digital-Content-Streaming-Backend-System\\src\\data\\Users.csv");
 
         if (!usersFile.exists()) {
             usersFile.createNewFile();
@@ -72,7 +72,7 @@ public class UserRepository {
         }
 
         File usersFile = new File(
-                "D:/Projects/Core JAVA/Media Vault - Digital Content & Streaming Backend System/Program/src/data/UserPlayList.csv");
+                "D:\\DSA Project\\Media-Vault---Digital-Content-Streaming-Backend-System\\src\\data\\UserPlaylist.csv");
 
         try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(usersFile, false))) {
             for (XyzUser u : users) {

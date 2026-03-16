@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import data.Nav;
 import data.SongList;
 import model.Greetings;
 import model.Song;
@@ -36,25 +37,21 @@ public class AdminService {
         adminService.trendingTop3Songs();
     }
 
-    public void addSong() throws IOException {
+    public void addSong() throws IOException, InterruptedException {
         SongList songList = new SongList();
         songList.loadsongList();
         ArrayList<Song> list = new ArrayList<>();
         list = songList.getSongList();
         Song song = new Song();
-        // -----------------------------inputs--------------------
+        Thread.sleep(1000);
         song.setId((list.size() + 1));
         System.out.print("                                                                      Enter Song Title:-");
         String title = sc.nextLine();
-        // sc.nextLine();
         song.setTitle(title);
-        System.out
-                .print(
-                        "                                                                      Enter Song Duration(min):-");
+        System.out.print(
+                "                                                                      Enter Song Duration(min):-");
         double duration = sc.nextDouble();
         song.setDuration(duration);
-        // ----------------------------repo---------------------------------------------------
-
         songRepository.addSong(song);
     }
 
@@ -62,37 +59,34 @@ public class AdminService {
         songRepository.getAllSongs();
     }
 
-    public void searchSong() throws InterruptedException, FileNotFoundException {
-        Greetings greeting = new Greetings();
+    // ── updated: accepts username for Nav logging ──
+    public void searchSong(String username) throws InterruptedException, FileNotFoundException {
         String padding = " ".repeat(67);
         System.out.printf(padding + "(1)BY ID %-20s (2)BY NAME%n", "");
         System.out.print("                                                                   Enter:-");
         int choice = sc.nextInt();
         switch (choice) {
             case 1:
-                searchById();
+                searchById(username);
                 break;
-
             case 2:
-                searchByName();
+                searchByName(username);
                 break;
-
             default:
                 break;
         }
     }
 
-    public static void searchById() throws InterruptedException, FileNotFoundException {
+    public static void searchById(String username) throws InterruptedException, FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         SongList songList = new SongList();
         Greetings greetings = new Greetings();
         songList.loadsongList();
         ArrayList<Song> list = songList.getSongList();
-        System.out
-                .print(
-                        "                                                                      Enter Id:-");
+        System.out.print(
+                "                                                                      Enter Id:-");
         int searchId = sc.nextInt();
-        // --------SEARCHING [BINARY]-------
+
         int l = 0;
         int h = list.size() - 1;
 
@@ -103,7 +97,7 @@ public class AdminService {
             return;
         }
 
-        Song foundSong = new Song();
+        Song foundSong = null;
 
         while (l <= h) {
             int mid = (l + h) / 2;
@@ -120,9 +114,12 @@ public class AdminService {
         if (foundSong == null) {
             greetings.load5s();
             String padding = " ".repeat(67);
-            System.out.printf(padding + "(1)SORRY SONG IS NOT AVAILABLE %-20s %n", "");
+            System.out.printf(padding + "SORRY SONG IS NOT AVAILABLE %-20s %n", "");
             return;
         }
+
+        // ── log found song ──
+        Nav.log(username, "Searched by ID: " + foundSong.getTitle());
 
         String singlePadding = " ".repeat(67);
         System.out.println(singlePadding + "------------------------------------");
@@ -136,20 +133,17 @@ public class AdminService {
         System.out.printf(singlePadding + "| Views:- %-26s |%n", foundSong.getViews());
         System.out.printf(singlePadding + "| %-34s |%n", "");
         System.out.println(singlePadding + "------------------------------------");
-
     }
 
-    public static void searchByName() throws FileNotFoundException {
+    public static void searchByName(String username) throws FileNotFoundException {
         SongList songList = new SongList();
         ArrayList<Song> list = new ArrayList<>();
         songList.loadsongList();
         list = songList.getSongList();
         Scanner sc = new Scanner(System.in);
-        System.out
-                .print(
-                        "                                                                      Enter Song Name:-");
-        String searchName = sc.next();
-        searchName.trim();
+        System.out.print(
+                "                                                                      Enter Song Name:-");
+        String searchName = sc.next().trim();
 
         if (list.size() == 0) {
             String padding = " ".repeat(67);
@@ -157,7 +151,7 @@ public class AdminService {
             return;
         }
 
-        Song foundSong = new Song();
+        Song foundSong = null;
 
         for (int i = 0; i < list.size(); i++) {
             if (searchName.equalsIgnoreCase(list.get(i).getTitle())) {
@@ -171,6 +165,9 @@ public class AdminService {
             System.out.printf(padding + "SORRY SONG IS NOT AVAILABLE %-20s %n", "");
             return;
         }
+
+        // ── log found song ──
+        Nav.log(username, "Searched by Name: " + foundSong.getTitle());
 
         String singlePadding = " ".repeat(67);
         System.out.println(singlePadding + "------------------------------------");
@@ -193,30 +190,25 @@ public class AdminService {
         top3 = q.getTop3TrendingSongs();
 
         int i = 0;
-
         while (i < top3.size()) {
             String padding = " ".repeat(45);
             String singlePadding = " ".repeat(63);
 
             if (i + 1 < top3.size()) {
-
                 System.out.println(
                         padding + "------------------------------------    ------------------------------------");
                 System.out.printf(padding + "| %-34s |    | %-34s |%n", "", "");
                 System.out.printf(padding + "| Name:- %-27s |    | Name:- %-27s |%n",
-                        top3.get(i).getTitle(),
-                        top3.get(i + 1).getTitle());
+                        top3.get(i).getTitle(), top3.get(i + 1).getTitle());
                 System.out.printf(padding + "| %-34s |    | %-34s |%n", "", "");
                 System.out.printf(padding + "| Duration:- %-23s |    | Duration:- %-23s |%n",
-                        top3.get(i).getDuration(),
-                        top3.get(i + 1).getDuration());
+                        top3.get(i).getDuration(), top3.get(i + 1).getDuration());
                 System.out.printf(padding + "| %-34s |    | %-34s |%n", "", "");
-                System.out.printf(padding + "| Id:- %-29s |    | Id:- %-29s |%n", top3.get(i).getId(),
-                        top3.get(i + 1).getId());
+                System.out.printf(padding + "| Id:- %-29s |    | Id:- %-29s |%n",
+                        top3.get(i).getId(), top3.get(i + 1).getId());
                 System.out.printf(padding + "| %-34s |    | %-34s |%n", "", "");
                 System.out.printf(padding + "| Views:- %-26s |    | Views:- %-26s |%n",
-                        top3.get(i).getViews(),
-                        top3.get(i + 1).getViews());
+                        top3.get(i).getViews(), top3.get(i + 1).getViews());
                 System.out.printf(padding + "| %-34s |    | %-34s |%n", "", "");
                 System.out.println(
                         padding + "------------------------------------    ------------------------------------");

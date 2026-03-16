@@ -4,10 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.Flow.Subscriber;
-import java.util.concurrent.Flow.Subscription;
 
 import controller.LoggedInUserController;
+import data.Nav;
 import data.UserList;
 import model.Greetings;
 import model.Song;
@@ -22,10 +21,9 @@ public class UserService {
                 User newUser = new User();
                 UserRepository userRepository = new UserRepository();
                 Scanner sc = new Scanner(System.in);
-                // ========================user inputs======================
 
                 System.out.print(
-                                "                                                                     ## Enter Name {Eg:Abhishek}:- ");
+                                "                                                                     ## Enter Name {Eg:Tun Tun Mosi}:- ");
                 newUser.setName(sc.nextLine());
                 System.out.print(
                                 "                                                                     ## Enter Phone {Eg:89452XXXX}:- ");
@@ -39,7 +37,7 @@ public class UserService {
                 }
 
                 System.out.print(
-                                "                                                                     ## Enter Email {Eg:avi@gamil.com}:- ");
+                                "                                                                     ## Enter Email {Eg:email@gamil.com}:- ");
                 String email = sc.next();
                 if (email.endsWith(".com")) {
                         newUser.setEmail(email);
@@ -50,11 +48,11 @@ public class UserService {
                 }
 
                 System.out.print(
-                                "                                                                     ## Set Password{Eg:avi2025}:- ");
+                                "                                                                     ## Set Password{Eg:user2025}:- ");
                 newUser.setPassword(sc.next());
 
                 System.out.print(
-                                "                                                                     ## Set Id {Eg:avi_2025}:- ");
+                                "                                                                     ## Set Id {Eg:user_2025}:- ");
                 newUser.setUserId(sc.next());
                 System.out.println();
                 System.out.println(
@@ -65,7 +63,6 @@ public class UserService {
                 subscription.setPrice(0);
                 newUser.setSubscription(subscription);
                 userRepository.addUser(newUser);
-
         }
 
         public void showSongs() throws FileNotFoundException {
@@ -80,23 +77,32 @@ public class UserService {
                 UserList userList = new UserList();
                 userList.loadUserList();
                 ArrayList<User> list = userList.getUserList();
+
                 System.out.print(
-                                "                                                                     ## Enter Email {Eg:avi@gamil.com}:- ");
+                                "                                                                     ## Enter Email {Eg:user@gamil.com}:- ");
                 String enteredEmail = sc.next();
                 System.out.print(
-                                "                                                                     ## Set Password{Eg:avi2025}:- ");
+                                "                                                                     ## Set Password{Eg:user2025}:- ");
                 String enteredPassword = sc.next();
+
                 int l = 0;
                 int h = list.size();
 
                 while (l < h) {
                         if (list.get(l).getEmail().equals(enteredEmail)
                                         && list.get(l).getPassword().equals(enteredPassword)) {
+
+                                User loggedUser = list.get(l);
+
+                                // ── NAV: load past history + log login ──
+                                Nav.load(loggedUser.getUserId());  // ← yahi change hai
+                                Nav.log(loggedUser.getUserId(), "Logged in");
+
                                 System.out.println();
                                 System.out.println(
                                                 "                                                                           LOGGED IN SUCCESSFULLY ");
-                                greetings.welcomeToLoggedInUser(list.get(l).getName(), list.get(l).getUserId());
-                                loggedInUserController.loggedInUser(list.get(l));
+                                greetings.welcomeToLoggedInUser(loggedUser.getName(), loggedUser.getUserId());
+                                loggedInUserController.loggedInUser(loggedUser);
                                 return;
                         }
                         l++;
@@ -113,30 +119,25 @@ public class UserService {
                 top10 = q.getTop10TrendingSongs();
 
                 int i = 0;
-
                 while (i < top10.size()) {
                         String padding = " ".repeat(45);
                         String singlePadding = " ".repeat(63);
 
                         if (i + 1 < top10.size()) {
-
                                 System.out.println(
                                                 padding + "------------------------------------    ------------------------------------");
                                 System.out.printf(padding + "| %-34s |    | %-34s |%n", "", "");
                                 System.out.printf(padding + "| Name:- %-27s |    | Name:- %-27s |%n",
-                                                top10.get(i).getTitle(),
-                                                top10.get(i + 1).getTitle());
+                                                top10.get(i).getTitle(), top10.get(i + 1).getTitle());
                                 System.out.printf(padding + "| %-34s |    | %-34s |%n", "", "");
                                 System.out.printf(padding + "| Duration:- %-23s |    | Duration:- %-23s |%n",
-                                                top10.get(i).getDuration(),
-                                                top10.get(i + 1).getDuration());
+                                                top10.get(i).getDuration(), top10.get(i + 1).getDuration());
                                 System.out.printf(padding + "| %-34s |    | %-34s |%n", "", "");
-                                System.out.printf(padding + "| Id:- %-29s |    | Id:- %-29s |%n", top10.get(i).getId(),
-                                                top10.get(i + 1).getId());
+                                System.out.printf(padding + "| Id:- %-29s |    | Id:- %-29s |%n",
+                                                top10.get(i).getId(), top10.get(i + 1).getId());
                                 System.out.printf(padding + "| %-34s |    | %-34s |%n", "", "");
                                 System.out.printf(padding + "| Views:- %-26s |    | Views:- %-26s |%n",
-                                                top10.get(i).getViews(),
-                                                top10.get(i + 1).getViews());
+                                                top10.get(i).getViews(), top10.get(i + 1).getViews());
                                 System.out.printf(padding + "| %-34s |    | %-34s |%n", "", "");
                                 System.out.println(
                                                 padding + "------------------------------------    ------------------------------------");
@@ -157,5 +158,4 @@ public class UserService {
                         }
                 }
         }
-
 }

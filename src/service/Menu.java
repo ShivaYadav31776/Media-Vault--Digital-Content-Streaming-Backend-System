@@ -21,7 +21,7 @@ public class Menu {
                 System.out.println(
                                 "                                                                    ||        5. BACK                 ||");
                 System.out.println(
-                                "                                                                    ||                                ||");
+                                "                                                                    ||        6. NAVIGATION HISTORY                      ||");
                 Thread.sleep(100);
                 System.out.println(
                                 "                                                                      ================================");
@@ -75,7 +75,7 @@ public class Menu {
                 System.out.println(
                                 "                                                                    ||        5. ADD SONG->PLAYLIST   ||");
                 System.out.println(
-                                "                                                                    ||                                ||");
+                                "                                                                    ||        6. NAVIGATION NHISTORY  ||");
                 Thread.sleep(100);
                 System.out.println(
                                 "                                                                      ================================");

@@ -10,13 +10,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import model.Greetings;
 import model.Song;
 import model.User;
 
 public class SongRepository {
-    public void addSong(Song song) throws IOException {
+    public void addSong(Song song) throws IOException, InterruptedException {
         File songsFile = new File(
-                "D:/Projects/Core JAVA/Media Vault - Digital Content & Streaming Backend System/Program/src/data/Songs.csv");
+                "D:\\DSA Project\\Media-Vault---Digital-Content-Streaming-Backend-System\\src\\data\\Songs.csv");
         if (!songsFile.exists()) {
             songsFile.createNewFile();
         }
@@ -32,6 +33,9 @@ public class SongRepository {
         String songData = songId + "," + songTitle + "," + songDuration + "," + songViews + ","
                 + ("USERS:-" + viewedUsers)
                 + "\n";
+                Greetings greetings =  new Greetings();
+                greetings.load5s();; // ----> load 10s
+                System.out.println();
         bufferedOutputStreamSong.write(songData.getBytes());
         bufferedOutputStreamSong.close();
         System.out.println(
@@ -40,7 +44,7 @@ public class SongRepository {
 
     public void getAllSongs() throws FileNotFoundException {
         File songsFile = new File(
-                "D:/Projects/Core JAVA/Media Vault - Digital Content & Streaming Backend System/Program/src/data/Songs.csv");
+                "D:\\DSA Project\\Media-Vault---Digital-Content-Streaming-Backend-System\\src\\data\\Songs.csv");
 
         BufferedInputStream bufferedInputStreamSongs = new BufferedInputStream(new FileInputStream(songsFile));
 

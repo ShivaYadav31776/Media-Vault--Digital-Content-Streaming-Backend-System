@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.Scanner;
 
+import data.Nav;
 import model.Greetings;
 import service.AdminService;
 import service.Menu;
@@ -27,16 +28,12 @@ public class UserController {
                             "                                                                    ||             1.REGISTER          ||");
                     System.out.println(
                             "                                                                    ||             2.LOGIN             ||");
-
                     System.out.println(
                             "                                                                  =========================================== ");
                     greetings.enter();
 
-                    /* ----------------------------------------------- */
-
                     int choose = sc.nextInt();
                     switch (choose) {
-
                         case 1:
                             userService.registerUser();
                             break;
@@ -46,18 +43,14 @@ public class UserController {
                         default:
                             break;
                     }
-
                     break;
-
-                // ---------------------------------------case
-                // 2-------------------------------------------
 
                 case 2:
                     adminService.showSongs();
                     break;
 
                 case 3:
-                    adminService.searchSong();
+                    adminService.searchSong("guest");
                     break;
 
                 case 4:
@@ -66,6 +59,7 @@ public class UserController {
 
                 case 5:
                     return;
+
                 default:
                     break;
             }
